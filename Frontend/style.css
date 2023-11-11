@@ -4,13 +4,26 @@
     padding: 0;
 
   }
-
+/*
   .main{
     width: 100%;
     background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(logo.jpg);
     background-position: center;
     background-size: cover;
     height: 100vh;
+}
+*/
+
+.background-container {
+    background-image: url('logo.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Set the height to your desired length */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white; /* Set the text color to be visible on the background */
 }
 
 .logo{
@@ -22,6 +35,7 @@
     padding-top: 10px;
     margin-top: 5px
 }
+
 
 .slogan{
     color: #000000;
@@ -77,6 +91,39 @@
     padding: 10px;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+}
+
+.slides{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    color:#fff;
+
+}
+
+.slides h2{
+    font-size: 70px;
+    font-weight: 600;
+    max-width: 650px;
+}
+.slide1{
+    background:linear-gradient(454deg, #4f4080, #9553ff)
+}
+
+.slide1{
+    background:linear-gradient(454deg, #404c80, #53ff53)
+}
+
+.slide1{
+    background:linear-gradient(454deg, #9574ff, #ff5353)
 }
 
 .home .par1{
