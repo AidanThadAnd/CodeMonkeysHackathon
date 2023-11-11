@@ -15,6 +15,8 @@ soup = BeautifulSoup(response.content, 'html.parser')
 itemLabels = soup.find_all(class_="a-color-secondary a-size-base prodDetSectionEntry")
 itemDetails = soup.find_all(class_='a-size-base prodDetAttrValue')
 productName = soup.find(id="productTitle")
+
+
 x = 0
 print(productName.text.strip())
 for label in itemLabels:
