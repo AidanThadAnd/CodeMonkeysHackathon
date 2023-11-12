@@ -52,5 +52,5 @@ def grabItemName(barcodeID: str):
         return "Error: Invalid barcode"
 
     
-name = grabItemName("070942001472")
+name = grabItemName("069000040508")
 print(name)
