@@ -179,7 +179,9 @@
                 disposablePrompt = result.disposablePrompt;
                 commonFixesPrompt = result.commonFixesPrompt
                 //If the barcode isn't found then 
+                console.log("before if")
                 if(disposablePrompt != null){
+                    console.log("after if")
                     splitStringAndAddParagraphs(commonFixesPrompt, /(\d)/, 1);
                     splitStringAndAddParagraphs(disposablePrompt, /(\d)/, 2);
                     var container = document.getElementById('done');

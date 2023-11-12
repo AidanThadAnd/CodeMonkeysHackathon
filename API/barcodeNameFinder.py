@@ -12,7 +12,6 @@ CORS(app)
 
 
 barcodeSession = requests.Session()
-UPCITEMD_API_URL = "https://api.upcitemdb.com/prod/trial/lookup?upc=4002293401102"
 
 #Takes barcode Number
 #Returns name of product
@@ -22,9 +21,9 @@ def grabItemName():
             request_data = request.get_json()
             barcodeID = request_data['barcode']
             
-            print(barcodeID)
             UPCITEMD_API_URL = f"https://api.upcitemdb.com/prod/trial/lookup?upc={barcodeID}"
 
+            print(f"{barcodeID}")
             headers = {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
@@ -38,9 +37,9 @@ def grabItemName():
                 try:
                  product_name = data["items"][0]["title"]
                  print(product_name)
-                 disposablePrompt = print(gptResponse.how_to_dispose(product_name))
-                 commonFixesPrompt = print(gptResponse.common_fixes(product_name))
-                 return jsonify({"disposablePrompt": "disposablePrompt", "commonFixesPrompt": "commonFixesPrompt"})
+                 disposablePrompt = gptResponse.how_to_dispose(product_name)
+                 commonFixesPrompt = gptResponse.common_fixes(product_name)
+                 return jsonify({"disposablePrompt": disposablePrompt, "commonFixesPrompt": commonFixesPrompt})
 
                 except KeyError:
                 
