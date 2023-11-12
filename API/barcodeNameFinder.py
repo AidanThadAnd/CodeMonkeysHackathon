@@ -3,16 +3,16 @@ import requests
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
 import gptResponse
+# API for UPC lookup (100 LOOKUPS/DAY MAX) https://www.upcitemdb.com/wp/docs/main/development/
+
 
 app = Flask(__name__)
-
 CORS(app)
 
+
 barcodeSession = requests.Session()
-BARCODE_API_URL = "https://www.buycott.com/api/v4/products/lookup"
-BARCODE_ACCESS_TOKEN = "TB1g4mG7r2LjST04BSrLx-BtWdThbynryW-DUKm4"
+UPCITEMD_API_URL = "https://api.upcitemdb.com/prod/trial/lookup?upc=4002293401102"
 
 #Takes barcode Number
 #Returns name of product
@@ -23,28 +23,24 @@ def grabItemName():
             barcodeID = request_data['barcode']
             
             print(barcodeID)
-            params = { 
-                   "barcode": barcodeID,
-                   "access_token": BARCODE_ACCESS_TOKEN
-                  }
+            UPCITEMD_API_URL = f"https://api.upcitemdb.com/prod/trial/lookup?upc={barcodeID}"
 
             headers = {
-            "Content-Type": "application/json"
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Accept-Encoding': 'gzip,deflate',
             }
 
-            response = barcodeSession.get(BARCODE_API_URL, headers=headers, params=params)
+            response = barcodeSession.get(UPCITEMD_API_URL, headers=headers)
 
             if response.status_code == 200:
-              # If the response is in JSON format, use response.json()
                 data = response.json()
-
-                # print(data)
                 try:
-                 product_name = data["products"][0]["product_name"]
-
-                 disposablePrompt = gptResponse.how_to_dispose(product_name)
-                 commonFixesPrompt = gptResponse.common_fixes(product_name)
-                 return jsonify({"disposablePrompt": disposablePrompt, "commonFixesPrompt": commonFixesPrompt})
+                 product_name = data["items"][0]["title"]
+                 print(product_name)
+                 disposablePrompt = print(gptResponse.how_to_dispose(product_name))
+                 commonFixesPrompt = print(gptResponse.common_fixes(product_name))
+                 return jsonify({"disposablePrompt": "disposablePrompt", "commonFixesPrompt": "commonFixesPrompt"})
 
                 except KeyError:
                 
