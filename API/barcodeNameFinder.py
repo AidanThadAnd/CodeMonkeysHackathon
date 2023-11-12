@@ -48,7 +48,7 @@ def grabItemName():
 
                 except KeyError:
                 
-                 return jsonify({"error": "No barcode found"})
+                 return jsonify({"error": "Invalid barcode"})
 
             else:
                 return jsonify({"error": "Invalid barcode"})

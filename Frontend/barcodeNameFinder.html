@@ -30,10 +30,12 @@
           </div>
       </div>
     <h1>Barcode Scanner</h1>
+
+    <h3>Common problems and how to fix them:</h3>
     <div id="prompt1"></div> 
 
-    <!-- <h1>Prompt 2</h1> -->
-    <!-- <div id="promp2"></div>  -->
+    <h3>How to properly Dispose: </h3>>
+    <div id="prompt2"></div> 
 
     <div id="interactive" class="viewport"></div>
     
@@ -160,12 +162,13 @@
                 //splitStringAndAddParagraphs you'll see that 1 won't show up but the other will
                 disposablePrompt = result.disposablePrompt;
                 commonFixesPrompt = result.commonFixesPrompt
-                if(disposablePrompt != null){
-                    combinedPrompts = commonFixesPrompt + " And if you need to dispose remeber " + disposablePrompt
-                    splitStringAndAddParagraphs(combinedPrompts, /(\d)/, 1);
-                    }
-                //splitStringAndAddParagraphs(commonFixesPrompt, /(\d)/, 1);
-                //splitStringAndAddParagraphs(disposablePrompt, /(\d)/, 2);
+                //If the barcode isn't found then 
+                //if(disposablePrompt != null){
+                //    combinedPrompts = commonFixesPrompt + " And if you need to dispose remeber " + disposablePrompt
+                //    splitStringAndAddParagraphs(combinedPrompts, /(\d)/, 1);
+                //    }
+                splitStringAndAddParagraphs(commonFixesPrompt, /(\d)/, 1);
+                splitStringAndAddParagraphs(disposablePrompt, /(\d)/, 2);
                 return disposablePrompt;
             }
         }
