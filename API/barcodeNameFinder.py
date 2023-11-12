@@ -2,6 +2,7 @@ import os
 import requests
 import json
 
+
 barcodeSession = requests.Session()
 BARCODE_API_URL = "https://www.buycott.com/api/v4/products/lookup"
 BARCODE_ACCESS_TOKEN = "TB1g4mG7r2LjST04BSrLx-BtWdThbynryW-DUKm4"
@@ -18,8 +19,6 @@ def grabItemName(barcodeID: str):
     }
 
     response = barcodeSession.get(BARCODE_API_URL, headers=headers, params=params)
-
-
 
     if response.status_code == 200:
         # If the response is in JSON format, use response.json()

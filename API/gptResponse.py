@@ -1,31 +1,41 @@
 #openai.api_key = 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
 
-import openai
+from openai import OpenAI
 import os
 import pandas as pd
 import time
 
-openai.api_key = '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'
+api_key = "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"
 
-def get_completion(prompt, model="gpt-3.5-turbo"):
+client = OpenAI(api_key=api_key)
+
+model="gpt-3.5-turbo"
 
 
-    messages = [{"role": "user", "content": prompt}]
 
-    response = openai.ChatCompletion.create(
 
-    model=model,
+def how_to_dispose(prompt):
 
-    messages=messages,
+    messages = [{"role": "user", "content": "How should I dispose of " + prompt}]
 
-    temperature=0,
+    response = client.chat.completions.create(model=model, messages=messages, temperature=0,)
 
-)
+    return response.choices[0].message.content
 
-    return response.choices[0].message["content"]
+def problems_and_fixes(prompt):
 
-response = get_completion("say wow")
+    messages = [{"role": "user", "content": "What are common problems with " + prompt + " and how can I fix them"}]
 
-print(response)
+    response = client.chat.completions.create(model=model, messages=messages, temperature=0)
 
-#print(get_completion("Write me a prompt about water"))
+    return response.choices[0].message.content
+
+
+responseDisposal = how_to_dispose("Battery")
+
+responseProblems = problems_and_fixes("battery")
+
+print(responseDisposal)
+
+print(responseProblems)
+
