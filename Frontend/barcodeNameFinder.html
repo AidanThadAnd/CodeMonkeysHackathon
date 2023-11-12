@@ -30,7 +30,10 @@
           </div>
       </div>
     <h1>Barcode Scanner</h1>
-    <div id="message"></div> 
+    <div id="prompt1"></div> 
+
+    <h1>Prompt 2</h1>
+    <div id="promp2"></div> 
 
     <div id="interactive" class="viewport"></div>
     
@@ -95,25 +98,49 @@
             console.log(sendBarCodeToServer(code))
             return code;
         });
-        function splitStringAndAddParagraphs(inputString, separator) {
-          // Split the input string into an array using the specified separator
-          var stringArray = inputString.split(separator);
 
-          // Get a reference to the container where you want to add the paragraphs
-          var container = document.getElementById('message'); // Replace 'yourContainerId' with the actual ID of your container
+        //It will not attempt to find the last code tried
+        let lastCodeTried
 
-          // Clear the container content
-          container.innerHTML = '';
+        /*
+        In order to get both prompts to work I had to make it so there was 2 prompt paragraphs, quite ugly
+        A switch case would probably be cleaner, don't care
+        */
+        function splitStringAndAddParagraphs(inputString, separator, promptInt) {
+            if(promptInt==1){
+                // Split the input string into an array using the specified separator
+                var stringArray = inputString.split(separator);
 
-          // Iterate through the array and add a new paragraph element for each split
-          stringArray.forEach(function (substring) {
-            var paragraph = document.createElement('p'); // Create a new paragraph element
-            paragraph.textContent = substring; // Set the text content of the paragraph
-            container.appendChild(paragraph); // Append the paragraph to the container
-          });
+                // Get a reference to the container where you want to add the paragraphs
+                var container = document.getElementById('prompt1'); // Replace 'yourContainerId' with the actual ID of your container
+
+                // Clear the container content
+                container.innerHTML = '';
+
+                // Iterate through the array and add a new paragraph element for each split
+                stringArray.forEach(function (substring) {
+                  var paragraph = document.createElement('p'); // Create a new paragraph element
+                  paragraph.textContent = substring; // Set the text content of the paragraph
+                  container.appendChild(paragraph); // Append the paragraph to the container
+                });
+            }
+            else{
+                 // Split the input string into an array using the specified separator
+                var stringArray = inputString.split(separator);
+                // Get a reference to the container where you want to add the paragraphs
+                var container = document.getElementById('prompt2'); // Replace 'yourContainerId' with the actual ID of your container
+                // Clear the container content
+                container.innerHTML = '';
+                // Iterate through the array and add a new paragraph element for each split
+                stringArray.forEach(function (substring) {
+                  var paragraph = document.createElement('p'); // Create a new paragraph element
+                  paragraph.textContent = substring; // Set the text content of the paragraph
+                  container.appendChild(paragraph); // Append the paragraph to the container
+                });
         }
+    }
         async function sendBarCodeToServer(barcode) {
-
+                if(barcode != lastCodeTried){
                 const response = await fetch('http://127.0.0.1:5000/grabItemName', {
                     method: 'POST',
                     headers: {
@@ -127,13 +154,16 @@
 
                 const result = await response.json();
 
-                // Handle the result from the server, for example, display the barcode data
-                productName = result.barcode;
-                console.log(productName)
-                splitStringAndAddParagraphs(productName, /(\d)/);
-                return productName;
+                // 2 Results in the json, the chatgpt disposablePrompt and, the commonFixes Prompt
+                //TODO: they are both there but not outputting properly, if you swap the order of
+                //splitStringAndAddParagraphs you'll see that 1 won't show up but the other will
+                disposablePrompt = result.disposablePrompt;
+                commonFixesPrompt = result.commonFixesPrompt
+                splitStringAndAddParagraphs(commonFixesPrompt, /(\d)/, 1);
+                splitStringAndAddParagraphs(disposablePrompt, /(\d)/, 2);
+                return disposablePrompt;
             }
-        
+        }
 
     </script>
 </body>

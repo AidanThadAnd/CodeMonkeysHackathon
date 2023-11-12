@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import time
 
-api_key = "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"
+api_key = "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"
 
 client = OpenAI(api_key=api_key)
 
@@ -20,9 +20,9 @@ def how_to_dispose(prompt):
     finalResponse = response.choices[0].message.content
     return finalResponse
 
-def problems_and_fixes(prompt):
+def common_fixes(prompt):
 
-    messages = [{"role": "user", "content": "What are common problems with " + prompt + " and how can I fix them"}]
+    messages = [{"role": "user", "content": "What are 3 common problems with " + prompt + " and how can I fix them"}]
 
     response = client.chat.completions.create(model=model, messages=messages, temperature=0)
 
