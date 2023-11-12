@@ -1,19 +1,6 @@
-#CHATGPT API KEY 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
-#Buycot API Access token TB1g4mG7r2LjST04BSrLx-BtWdThbynryW-DUKm4
-#Access Token Secret     zJMDNYr8RgSB63V820iTVmZRLgjgsoBYeCffMSHw
-#Buycot Documentation    https://www.buycott.com/api/docs
-
-
-
-
-#import openai
 import os
-#import pandas as pd
-import time
 import requests
 import json
-
-#openai.api_key = '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'
 
 barcodeSession = requests.Session()
 BARCODE_API_URL = "https://www.buycott.com/api/v4/products/lookup"
@@ -50,7 +37,3 @@ def grabItemName(barcodeID: str):
         
     else:
         return "Error: Invalid barcode"
-
-    
-name = grabItemName("069000040508")
-print(name)
