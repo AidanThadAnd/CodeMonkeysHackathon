@@ -1,31 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Code Monkeys</title>
-  <!--link rel="stylesheet" href="./resources/css/index.css"-->
-  <link href="style.css" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Scanner</title>
+    <style>
+        #video-container {
+            position: relative;
+            width: 100%;
+        }
+
+        #barcode-result {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="main">
-        <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">Sustain Sphere</h2>
-            </div>
-
-            <div class="menu">
-                <ul>
-                    <li><a href="home.html">HOME</a></li>
-                    <li><a href="product.html">Product Scan</a></li>
-                    <li><a href="#sustain">How to live a more sustainable life</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
-            </div>
-
-            <div class="search">
-                <input class="srch" type="search" name="" placeholder="Type To text">
-                <a href="#"> <button class="btn">Search</button></a>
-            </div>
-        </div>
+    <h1>Barcode Scanner</h1>
+    
+    <div id="video-container">
+        <video id="video" width="100%" height="auto" playsinline></video>
+        <canvas id="canvas" style="display: none;"></canvas>
     </div>
+
+    <div id="barcode-result"></div>
+
+    <script>
+        // Function to start the camera and handle barcode scanning
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+
+                // Wait for the video to be loaded and start scanning
+                video.onloadedmetadata = () => {
+                    video.play();
+                    scanBarcode();
+                };
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        }
+
+        // Function to capture a frame from the video and send it to the backend for barcode scanning
+        async function scanBarcode() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const barcodeResult = document.getElementById('barcode-result');
+
+            // Set canvas dimensions to match video
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convert the canvas content to a data URL (base64)
+            const imageData = canvas.toDataURL('image/jpeg', 0.8).split(',')[1];
+
+            // Send the image data to the backend for barcode scanning
+            const response = await fetch('http://localhost:3000/scanner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ imageData }),
+            });
+
+            const result = await response.json();
+
+            if (result.error) {
+                console.error('Error scanning barcode:', result.error);
+                barcodeResult.innerHTML = 'Error scanning barcode.';
+            } else {
+                console.log('Barcode data:', result.barcodeData);
+                barcodeResult.innerHTML = 'Barcode: ' + result.barcodeData;
+            }
+
+            // Continue scanning recursively
+            requestAnimationFrame(scanBarcode);
+        }
+
+        // Start the camera when the page is loaded
+        document.addEventListener('DOMContentLoaded', startCamera);
+    </script>
 </body>
 </html>
