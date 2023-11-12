@@ -29,14 +29,29 @@
               </div>
           </div>
       </div>
+
+      
     <h1>Barcode Scanner</h1>
+    <div id="done"></div>
+    <style>
+        #done {
+            font-size: 24px; /* Adjust the font size as needed */
+            font-weight: bold;
+        }
+    </style>
 
-    <h3>Common problems and how to fix them:</h3>
-    <div id="prompt1"> <br> </div> 
-    
 
-    <h3>How to properly Dispose: </h3>
+
+    <details>
+    <summary>Common problems and how to fix them:</summary>
+    <div id="prompt1"> <br></div> 
+    </details>
+
+    <details>
+    <summary>How to properly Dispose: </summary>
     <div id="prompt2"></div> 
+    </details>
+
 
     <div id="interactive" class="viewport"></div>
     
@@ -167,6 +182,11 @@
                 if(disposablePrompt != null){
                     splitStringAndAddParagraphs(commonFixesPrompt, /(\d)/, 1);
                     splitStringAndAddParagraphs(disposablePrompt, /(\d)/, 2);
+                    var container = document.getElementById('done');
+                    container.innerHTML = 'Done Generation'
+                }
+                else{
+                    console.log("Invalid barcode")
                 }
                 return disposablePrompt;
             }
