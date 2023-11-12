@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Scanner</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/serratus/quaggaJS/0.12.1/dist/quagga.min.js"></script>
+</head>
+<body>
+    <h1>Barcode Scanner</h1>
+    <div id="interactive" class="viewport"></div>
+    <script>
+        // Initialize QuaggaJS
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector("#interactive"),
+                constraints: {
+                    width: 640,
+                    height: 480,
+                    facingMode: "environment"
+                },
+            },
+            locator: {
+                patchSize: "medium",
+                halfSample: true,
+            },
+            numOfWorkers: navigator.hardwareConcurrency || 4,
+            decoder: {
+                readers: ["ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader", "2of5_reader", "code_93_reader"]
+            },
+            locate: true,
+        }, function (err) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            Quagga.start();
+        });
+
+        // Add event listener for successful scans
+        Quagga.onDetected(function (result) {
+            var code = result.codeResult.code;
+            alert("Barcode detected: " + code);
+            console.log(sendBarCodeToServer(code))
+            return code;
+        });
+       
+        async function sendBarCodeToServer(barcode) {
+
+                const response = await fetch('http://127.0.0.1:5000/grabItemName', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ barcode: barcode }),
+                    
+                });
+                console.log(JSON.stringify({barcode: barcode}))
+
+                const result = await response.json();
+
+                // Handle the result from the server, for example, display the barcode data
+                productName = result.barcodeData;
+                console.log(result)
+                return productName
+            }
+        
+    
+
+
+    </script>
+</body>
+</html>

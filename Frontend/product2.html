@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Scanner</title>
+    <style>
+        #video-container {
+            position: relative;
+            width: 100%;
+        }
+
+        #barcode-result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Barcode Scanner</h1>
+    
+    <div id="video-container">
+        <video id="video" width="100%" height="auto" playsinline></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+    </div>
+
+    <div id="barcode-result"></div>
+
+    <!-- Add a button for capturing a photo -->
+    <button onclick="capturePhoto()">Capture Photo</button>
+
+    <script>
+
+        let photo; // Variable to store the captured photo
+        let barcode;
+        // Function to start the camera and handle barcode scanning
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+
+                // Wait for the video to be loaded and start scanning
+                video.onloadedmetadata = () => {
+                    video.play();
+                    scanBarcode();
+                };
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        }
+
+        // Function to capture a frame from the video and send it to the backend for barcode scanning
+        async function scanBarcode() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const barcodeResult = document.getElementById('barcode-result');
+
+            // Set canvas dimensions to match video
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convert the canvas content to a data URL (base64)
+            const imageData = canvas.toDataURL('image/jpeg', 0.8).split(',')[1];
+
+            // Store the captured photo in the variable
+            photo = imageData;
+
+            // Call the Flask backend with the captured photo
+            //await sendPhotoToServer(photo);
+
+            // Continue scanning recursively
+            requestAnimationFrame(scanBarcode);
+        }
+
+        // Function to be called when the user clicks the "Capture Photo" button
+        function capturePhoto() {
+            if (photo) {
+                // Do something with the captured photo, for example, display it in an image tag
+                const photoImage = document.createElement('img');
+                photoImage.src = 'data:image/jpeg;base64,' + photo;
+                document.body.appendChild(photoImage);
+                sendPhotoToServer(photo);
+
+            } else {
+                console.warn('No photo captured yet.');
+            }
+        }
+
+        // Function to send the captured photo to the Flask backend
+        async function sendPhotoToServer(photoData) {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/scanBarcode', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ image: photoData }),
+                    
+                });
+                console.log(JSON.stringify({image: photoData}))
+
+                const result = await response.json();
+
+                // Handle the result from the server, for example, display the barcode data
+                barcode = result.barcodeData;
+            } catch (error) {
+                console.error('Error sending photo to server:', error);
+            }
+        }
+
+        // Start the camera when the page is loaded
+        document.addEventListener('DOMContentLoaded', startCamera);
+    </script>
+</body>
+</html>

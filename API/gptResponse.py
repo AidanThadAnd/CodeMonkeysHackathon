@@ -5,14 +5,11 @@ import os
 import pandas as pd
 import time
 
-api_key = "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"
+api_key = "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"
 
 client = OpenAI(api_key=api_key)
 
 model="gpt-3.5-turbo"
-
-
-
 
 def how_to_dispose(prompt):
 
@@ -20,7 +17,8 @@ def how_to_dispose(prompt):
 
     response = client.chat.completions.create(model=model, messages=messages, temperature=0,)
 
-    return response.choices[0].message.content
+    finalResponse = response.choices[0].message.content
+    return finalResponse
 
 def problems_and_fixes(prompt):
 
@@ -28,14 +26,7 @@ def problems_and_fixes(prompt):
 
     response = client.chat.completions.create(model=model, messages=messages, temperature=0)
 
-    return response.choices[0].message.content
+    finalResponse = response.choices[0].message.content
+    return finalResponse
 
-
-responseDisposal = how_to_dispose("Battery")
-
-responseProblems = problems_and_fixes("battery")
-
-print(responseDisposal)
-
-print(responseProblems)
 

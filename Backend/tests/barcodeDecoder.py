@@ -1,28 +1,46 @@
 from flask import Flask, request, jsonify
 import cv2
 from pyzbar.pyzbar import decode
+import numpy as np
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
 
 # Endpoint to process barcode
 @app.route('/scanBarcode', methods=['POST'])
 def scan_barcode():
     try:
-        print("Something happened")
         # Get the image data from the request
-        image_data = request.files['image'].read()
+        request_data = request.get_json()
+        image_data = request_data['image']
 
-        # Convert the image data to a numpy array
-        image_array = np.frombuffer(image_data, np.uint8)
+        img = cv2.imread(image_data)
+        #print(image_data)
 
-        # Decode barcode using pyzbar
-        decoded_objects = decode(cv2.imdecode(image_array, cv2.IMREAD_COLOR))
+        #Convert the image data to a numpy array
+        #image_array = np.frombuffer(image_data.encode('utf-8'), np.uint8)
 
-        if decoded_objects:
-            barcode_data = decoded_objects[0].data.decode('utf-8')
-            return jsonify({"barcodeData": barcode_data})
-        else:
-            return jsonify({"error": "No barcode found"})
+        if ret:
+            for d in decode(frame):
+                s = d.data.decode()
+                print(s)
+                frame = cv2.rectangle(frame, (d.rect.left, d.rect.top),
+                                    (d.rect.left + d.rect.width, d.rect.top + d.rect.height), (0, 255, 0), 3)
+                frame = cv2.putText(frame, s, (d.rect.left, d.rect.top + d.rect.height),
+                                    cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 2, cv2.LINE_AA)
+        cv2.imshow(window_name, frame)
+
+
+#       # Decode barcode using pyzbar
+        #decoded_objects = decode(cv2.imdecode(image_array, cv2.IMREAD_COLOR))
+
+        #if decoded_objects:
+        #    barcode_data = decoded_objects[0].data.decode('utf-8')
+        #    return jsonify({"barcodeData": barcode_data})
+        #else:
+        return jsonify({"error": "No barcode found"})
     except Exception as e:
         print(str(e))
         return jsonify({"error": "Error scanning barcode"}), 500
