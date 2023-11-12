@@ -42,7 +42,7 @@ def grabItemName():
                 try:
                  product_name = data["products"][0]["product_name"]
 
-                 print(gptResponse.how_to_dispose(product_name))
+                 product_name = gptResponse.how_to_dispose(product_name)
                  return jsonify({"barcode": product_name})
 
                 except KeyError:

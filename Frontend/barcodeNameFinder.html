@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>Barcode Scanner</h1>
+    <p id="message"></p>
     <div id="interactive" class="viewport"></div>
     <script>
         // Initialize QuaggaJS
@@ -64,13 +65,13 @@
                 const result = await response.json();
 
                 // Handle the result from the server, for example, display the barcode data
-                productName = result.barcodeData;
-                console.log(result)
+                productName = result.barcode;
+                console.log(productName)
+                message.innerHTML = productName
                 return productName
             }
         
     
-
 
     </script>
 </body>
