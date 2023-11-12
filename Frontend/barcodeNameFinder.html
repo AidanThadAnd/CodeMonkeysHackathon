@@ -30,7 +30,8 @@
           </div>
       </div>
     <h1>Barcode Scanner</h1>
-    <p id="message"></p>
+    <div id="message"></div> 
+
     <div id="interactive" class="viewport"></div>
     
     <footer>
@@ -94,7 +95,23 @@
             console.log(sendBarCodeToServer(code))
             return code;
         });
-       
+        function splitStringAndAddParagraphs(inputString, separator) {
+          // Split the input string into an array using the specified separator
+          var stringArray = inputString.split(separator);
+
+          // Get a reference to the container where you want to add the paragraphs
+          var container = document.getElementById('message'); // Replace 'yourContainerId' with the actual ID of your container
+
+          // Clear the container content
+          container.innerHTML = '';
+
+          // Iterate through the array and add a new paragraph element for each split
+          stringArray.forEach(function (substring) {
+            var paragraph = document.createElement('p'); // Create a new paragraph element
+            paragraph.textContent = substring; // Set the text content of the paragraph
+            container.appendChild(paragraph); // Append the paragraph to the container
+          });
+        }
         async function sendBarCodeToServer(barcode) {
 
                 const response = await fetch('http://127.0.0.1:5000/grabItemName', {
@@ -113,11 +130,10 @@
                 // Handle the result from the server, for example, display the barcode data
                 productName = result.barcode;
                 console.log(productName)
-                message.innerHTML = productName
-                return productName
+                splitStringAndAddParagraphs(productName, /(\d)/);
+                return productName;
             }
         
-    
 
     </script>
 </body>
