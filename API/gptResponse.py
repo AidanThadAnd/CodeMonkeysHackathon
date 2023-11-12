@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import time
 
-api_key = "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"
+api_key = "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"
 
 client = OpenAI(api_key=api_key)
 
