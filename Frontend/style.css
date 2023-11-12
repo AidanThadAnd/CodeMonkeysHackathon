@@ -4,7 +4,7 @@
     padding: 0;
 
   }
-/*
+
   .main{
     width: 100%;
     background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(logo.jpg);
@@ -12,23 +12,13 @@
     background-size: cover;
     height: 100vh;
 }
-*/
 
-.background-container {
-    background-image: url('logo.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 500px; /* Set the height to your desired length */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white; /* Set the text color to be visible on the background */
-}
+
+
 
 .logo{
     color: #f9f9f9;
-    font-size: 35px;
+    font-size: 45px;
     font-family: "Times New Roman";
     padding-left: 20px;
     float: left;
@@ -38,11 +28,12 @@
 
 
 .slogan{
-    color: #000000;
-    font-size: 79x;
+    color: #ffffff;
+    font-size: 20px;
     font-family: "Times New Roman";
     text-align: center;
     padding-left: 20px;
+    background: linear-gradient(to right, #194924, #62a662);
 
 }
 
@@ -69,76 +60,167 @@
 
 .navbar li {
   float:right;
+  font-size:18px;
 }
 
-.search{
-    width: 330px;
-    float: left;
-    margin-left: 270px;
-}
-
-.srch{
-    font-family: 'Times New Roman';
-    width: 200px;
-    height: 40px;
-    background: transparent;
-    border: 1px solid #141414;
-    margin-top: 13px;
-    color: #fff;
-    border-right: none;
-    font-size: 16px;
-    float: left;
-    padding: 10px;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-}
 
 .container{
     width: 100%;
     height: 100vh;
 }
 
+
+
+.p {
+    background: linear-gradient(to right, #194924, #62a662);
+    color: white; /* Set the text color to be visible on the background */
+    padding: 20px; /* Adjust padding to improve text readability */
+    margin-bottom: 15px;
+    line-height: 2;
+}
+ 
+
 .slides{
+    background: none;
+    /*
     width: 100%;
     height: 100vh;
+    background: linear-gradient(454deg, #404c80, #53ff53);
+    background: linear-gradient(to right, #52514f, #454744);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 50px;
     color:#fff;
+   */ 
 
 }
 
-.slides h2{
-    font-size: 70px;
-    font-weight: 600;
-    max-width: 650px;
-}
-.slide1{
-    background:linear-gradient(454deg, #4f4080, #9553ff)
+.h_2{
+
+    line-height: 1.5;
 }
 
-.slide1{
-    background:linear-gradient(454deg, #404c80, #53ff53)
-}
+.home h_2{
 
-.slide1{
-    background:linear-gradient(454deg, #9574ff, #ff5353)
-}
-
-.home .par1{
-    padding-left: 20px;
-    padding-bottom: 25px;
-    font-family: 'Times New Roman';
-    letter-spacing: 1.2px;
-    line-height: 30px;
+    line-height: 1.5;
 }
 
 
-.about .par2{
-    padding-left: 20px;
-    padding-bottom: 25px;
-    font-family: 'Times New Roman';
-    letter-spacing: 1.2px;
-    line-height: 30px;
+par1{
+    margin-bottom: 15px;
 }
+
+
+footer{
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(to right, #3c3c3a, #6e706d);
+    color: #fff;
+    padding: 50px 0 8px;
+    border-top-left-radius: 125px;
+    font-size: 13px;
+    line-height: 20px;
+    bottom: 0;
+    position: static;
+}
+
+.row{
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.col{
+    flex-basis: 25%;
+    padding: 10px;
+}
+
+.sphere{
+    width: 80px;
+    margin-bottom: 30px;
+}
+
+.col h3{
+    width: fit-content;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.email-id{
+    width: fit-content;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+
+}
+
+form{
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 50px;
+}
+
+form.far{
+    font-size: 18px;
+    margin-right: 10px;
+
+}
+
+form input{
+    width: 100%;
+    background: transparent;
+    color: #ccc;
+    border: 0;
+    outline: none;
+}
+
+form button{
+    background: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+form button .fas{
+    font-size: 16px;
+    color: #ccc;
+}
+.underline{
+    width: 100%;
+    height: 5px;
+    background: #767676;
+    border-radius: 3px;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    overflow: hidden;
+}
+
+.underline span{
+    width: 15px;
+    height: 100%;
+    background: #fff;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    animation: moving 2s linear infinite;
+}
+
+@keyframes moving{
+    0%{
+        left: -10px;
+    }
+    100%{
+        left: 100px;
+    }
+}
+
+
+
