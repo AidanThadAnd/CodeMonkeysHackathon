@@ -6,11 +6,57 @@
     <title>Barcode Scanner</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0.12.1/dist/quagga.min.js"></script>
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1ce0c10a79.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+  </head>
+  <body>
+      <div class="main">
+          <div class="navbar">
+              <div class="icon">
+                  <h2 class="logo">Sustain Sphere</h2>
+              </div>
+  
+              <div class="menu">
+                  <ul>
+                      <li><a href="index.html">Home</a></li>
+                      <li><a href="#product">Scan</a></li>
+                      <li><a href="learnm.html">Learn More</a></li>
+                      <li><a href="#contact">Contact</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
     <h1>Barcode Scanner</h1>
     <p id="message"></p>
     <div id="interactive" class="viewport"></div>
+    
+    <footer>
+        <div class="row">
+            <div class= "col"> 
+                <img src="sp.png" class="sphere">
+                <p>Don't miss out on our monthly articles about sustainability at home, where we share 
+                    valuable insights and tips for creating a more eco-friendly and mindful living environment. 
+                    Suscribe now! 
+                </p>
+            </div>
+            <div id="contact" class="col"> 
+                <h3>Contact <div class="underline"><span></span></div></h3>
+                <p class="email-id">sphere.sustian@outlook.com</p>
+            </div>
+
+            <div class="col">
+                <h3>Newsletter <div class="underline"><span></span></div></h3>
+                <form>
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+
+    </footer> 
     <script>
         // Initialize QuaggaJS
         Quagga.init({

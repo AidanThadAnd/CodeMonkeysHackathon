@@ -355,6 +355,10 @@ form button .fas{
     max-width: 100%; /* Ensure responsiveness */
 }
 
+.message{
+    font-family: Open Sans;
+}
+
 
  
 
