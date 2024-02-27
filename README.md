@@ -19,4 +19,5 @@ Project for Hack the Change
 
 
 **Step 3:**
-![image](https://github.com/AidanThadAnd/CodeMonkeysHackathon/assets/78242226/96414b14-6507-4af4-ad05-9b8816b61be8)
+<img width="1251" alt="Screenshot 2024-02-27 at 2 30 10 PM" src="https://github.com/AidanThadAnd/CodeMonkeysHackathon/assets/78242226/686f5772-56d7-4d2d-9878-3b78967a4bb1">
+
