@@ -17,7 +17,8 @@ Project for Hack the Change
 
 ### Visual of Step 2 and 3
 **Step 2:**
-![image](https://github.com/AidanThadAnd/CodeMonkeysHackathon/assets/78242226/1b7f3aa7-7a5f-4544-bbb0-683b09ad8a97)
+![image](https://github.com/AidanThadAnd/CodeMonkeysHackathon/assets/78242226/be3ae2a5-311d-45e4-9853-981051b66f49)
+
 
 **Step 3:**
-![image](https://github.com/AidanThadAnd/CodeMonkeysHackathon/assets/78242226/23f4e380-1942-4a26-a130-5805d78659db)
+![image](https://github.com/AidanThadAnd/CodeMonkeysHackathon/assets/78242226/96414b14-6507-4af4-ad05-9b8816b61be8)
