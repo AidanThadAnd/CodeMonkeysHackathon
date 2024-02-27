@@ -2,7 +2,7 @@
 Project for Hack the Change
 
 ## Note for Usage
-**Inorder for proper usage you must supply an openAI key if you want the following tabs to be properly updated **
+**Inorder for proper usage you must supply an openAI key if you want the following tabs to be properly updated**
 1. "How to properly Dispose"
 2. "Common problems and how to fix them"
 
