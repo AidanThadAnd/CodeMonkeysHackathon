@@ -1,4 +1,4 @@
-# codemonkeysHTC
+# Code-monkeys-HTC
 Project for Hack the Change
 
 ## Note for Usage
