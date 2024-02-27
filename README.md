@@ -13,7 +13,7 @@ Project for Hack the Change
 3. Check the tabs _"Common problems and how to fix them:"_ and _"How to properly Dispose:"_
 4. Repeat steps 1-3 for any additional barcodes
 
-### Visual of Step 2 and 3
+### Visual of Step 2 and 3 for a container of Kraft Peanut Butter
 **Step 2:**
 ![image](https://github.com/AidanThadAnd/CodeMonkeysHackathon/assets/78242226/be3ae2a5-311d-45e4-9853-981051b66f49)
 
