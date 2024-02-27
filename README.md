@@ -10,9 +10,7 @@ Project for Hack the Change
 ## Typical workflow
 1. Position barcode infront of your webcam
 2. Confirm the barcode was scanned correctly
-3. Check tabs:
-  1. Common problems and how to fix them:
-  2. How to properly Dispose:
+3. Check the tabs _"Common problems and how to fix them:"_ and _"How to properly Dispose:"_
 4. Repeat steps 1-3 for any additional barcodes
 
 ### Visual of Step 2 and 3
